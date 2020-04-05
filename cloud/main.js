@@ -42,11 +42,15 @@ function saveToParse(json, request) {
     if (obj == null) {
       request.log.info("Criando concurso " + json.concurso.numero);
       obj = newObject(json);
-      obj.save();
+      obj.save(null, {
+        useMasterKey: true
+      });
     } else if (obj.get("completo") == false) {
       request.log.info("Atualizando concurso " + json.concurso.numero);
       obj = updateObject(obj, json);
-      obj.save();
+      obj.save(null, {
+        useMasterKey: true
+      });
     }
   });
 }
